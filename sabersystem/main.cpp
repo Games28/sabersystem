@@ -153,7 +153,6 @@ public:
 			for (int32_t j = 0; j < sprite->height; j++, fy += fym)
 			{
 				
-				
 				if (sprite->GetPixel(fx, fy) != olc::MAGENTA)
 				{
 					int32_t y1 = y + j;
@@ -161,13 +160,18 @@ public:
 					olc::Pixel p;
 					for (int i = 0; i < cut_sprite_line.size(); i++)
 					{
-						int32_t cutx = (int32_t)cut_sprite_line[i].x;
-						int32_t cuty = (int32_t)cut_sprite_line[i].y;
+						int32_t cutx = (int32_t)cut_sprite_line[i].x + x;
+						int32_t cuty = (int32_t)cut_sprite_line[i].y + y;
 						
-						if (x1 <= cutx && y1 <= cuty)
+						if (x1 < cutx && y1 < cuty)
 						{
 							
 							p = sprite->GetPixel(fx, fy);
+							
+						}
+						else
+						{
+							break;
 						}
 					
 						Draw(x1, y1, p);
@@ -175,8 +179,6 @@ public:
 					
 					
 					
-
-
 					
 				}
 			}
